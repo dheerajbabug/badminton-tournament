@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Saanvika Premier League</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav>
+        <div class="logo"><span>SAANVIKA PREMIER LEAGUE</span></div>
+        <div class="nav-links">
+            <a href="index.html">Register</a>
+            <a href="tournament.html">Schedule</a>
+            <a href="admin.html" class="active">Admin</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="admin-header">
+            <div>
+                <h1>Admin Dashboard</h1>
+                <p style="color: var(--text-dim)">Manage tournament participants and schedule for Saanvika Premier League.</p>
+            </div>
+            <button id="generateBtn" style="width: auto; padding: 0.8rem 2rem;">Generate Tournament (33 Players)</button>
+        </header>
+
+        <div class="form-card" style="max-width: 100%; margin: 0;">
+            <h2 style="margin-bottom: 1.5rem">Recent Registrations</h2>
+            <div id="participantList" style="color: var(--text-dim); text-align: center; padding: 2rem;">
+                No participants registered yet.
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">Tournament Generated!</div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

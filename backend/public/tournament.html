@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Schedule | Saanvika Premier League</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav>
+        <div class="logo"><span>SAANVIKA PREMIER LEAGUE</span></div>
+        <div class="nav-links">
+            <a href="index.html">Register</a>
+            <a href="tournament.html" class="active">Schedule</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="hero" style="padding: 2rem 0;">
+            <h1>Match Schedule</h1>
+            <p>Track the progress and upcoming matches of the Saanvika Premier League.</p>
+        </header>
+
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="Men's Singles">Men's Singles</button>
+            <button class="tab-btn" data-category="Men's Doubles">Men's Doubles</button>
+            <button class="tab-btn" data-category="Mixed Doubles">Mixed Doubles</button>
+        </div>
+
+        <div id="bracketContainer" class="round-container">
+            <div style="text-align: center; width: 100%; color: var(--text-dim);">
+                Loading tournament schedule...
+            </div>
+        </div>
+    </div>
+
+    <script src="tournament.js"></script>
+</body>
+</html>

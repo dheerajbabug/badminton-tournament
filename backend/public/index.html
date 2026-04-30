@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saanvika Premier League | Register</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav>
+        <div class="logo"><span>SAANVIKA PREMIER LEAGUE</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="active">Register</a>
+            <a href="tournament.html">Schedule</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Saanvika Premier League</h1>
+            <p>Join the most competitive badminton tournament of the year. Secure your spot now.</p>
+        </section>
+
+        <div class="form-card">
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="category">Tournament Category</label>
+                    <select id="category" name="category" required>
+                        <option value="" disabled selected>Select Category</option>
+                        <option value="Men's Singles">Men's Singles</option>
+                        <option value="Men's Doubles">Men's Doubles</option>
+                        <option value="Mixed Doubles">Mixed Doubles</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="regNo">Registration Number</label>
+                    <input type="text" id="regNo" name="regNo" placeholder="REG-001" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <div class="form-group" id="teamNameGroup" style="display: none;">
+                    <label for="teamName">Team Name</label>
+                    <input type="text" id="teamName" name="teamName" placeholder="Enter team name">
+                </div>
+                <button type="submit">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast">Registration Successful!</div>
+
+    <script src="app.js"></script>
+</body>
+</html>
