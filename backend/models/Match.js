@@ -15,6 +15,10 @@ const MatchSchema = new mongoose.Schema({
   endTime: Date,
   court: Number,
   winner: String,
+  score1: { type: Number, default: 0 },
+  score2: { type: Number, default: 0 },
+  status: { type: String, enum: ['pending', 'live', 'completed'], default: 'pending' },
+  isCompleted: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now }
 });
 
