@@ -11,7 +11,7 @@ const User = require("./models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-console.log("ENV CHECK:", process.env.MONGODB_URI);
+console.log("ENV CHECK:", process.env.MONGO_URI);
 dotenv.config();
 connectDB();
 
@@ -166,7 +166,7 @@ app.post("/api/register", async (req, res) => {
       if (emptyMatches.length > 0) {
         // Pick a random match from the empty ones
         matchToFill = emptyMatches[Math.floor(Math.random() * emptyMatches.length)];
-        
+
         // Randomly pick player1 or player2 if both are "Player X"
         if (matchToFill.player1.startsWith("Player ") && matchToFill.player2.startsWith("Player ")) {
           if (Math.random() > 0.5) matchToFill.player1 = displayName;
@@ -223,7 +223,7 @@ app.post("/api/generate-tournament", auth, async (req, res) => {
       for (let i = 1; i <= 33; i++) {
         playerNodes.push({ name: `Player ${i}`, fromMatch: null });
       }
-      
+
       // Shuffle the Player X labels so Round 1 is random (e.g., Player 14 vs Player 29)
       playerNodes = shuffleArray(playerNodes);
 
@@ -241,8 +241,8 @@ app.post("/api/generate-tournament", auth, async (req, res) => {
         // Handle Bye (Pick a random node for the Bye each round)
         if (currentRoundNodes.length % 2 !== 0) {
           const byeIdx = Math.floor(Math.random() * currentRoundNodes.length);
-          const byeNode = currentRoundNodes.splice(byeIdx, 1)[0]; 
-          
+          const byeNode = currentRoundNodes.splice(byeIdx, 1)[0];
+
           const matchIdx = matchGlobalIndex++;
           const match = new Match({
             matchIndex: matchIdx,
@@ -266,7 +266,7 @@ app.post("/api/generate-tournament", auth, async (req, res) => {
           const matchIdx = matchGlobalIndex++;
           const court = (activeMatchInRound % 2) + 1;
           const slotIndex = Math.floor(activeMatchInRound / 2);
-          
+
           const mStartTime = new Date(startTime);
           mStartTime.setMinutes(startTime.getMinutes() + (slotIndex * matchDuration));
 
@@ -283,10 +283,10 @@ app.post("/api/generate-tournament", auth, async (req, res) => {
             status: "pending"
           });
           await match.save();
-          
-          nextRoundNodes.push({ 
-            name: `Winner of Match ${matchIdx}`, 
-            fromMatch: matchIdx 
+
+          nextRoundNodes.push({
+            name: `Winner of Match ${matchIdx}`,
+            fromMatch: matchIdx
           });
           totalMatches++;
           activeMatchInRound++;
