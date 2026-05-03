@@ -11,6 +11,32 @@ if (categorySelect) {
     });
 }
 
+function showPopup(message, isSuccess) {
+    const overlay = document.getElementById('toastOverlay');
+    const toast = document.getElementById('toast');
+
+    toast.innerText = message;
+    toast.style.background = isSuccess ? '#22c55e' : '#ef4444';
+    overlay.style.display = 'flex';
+
+    // Trigger animation
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            toast.style.transform = 'scale(1)';
+            toast.style.opacity = '1';
+        });
+    });
+
+    const duration = isSuccess ? 3000 : 5000;
+    setTimeout(() => {
+        toast.style.transform = 'scale(0.8)';
+        toast.style.opacity = '0';
+        setTimeout(() => {
+            overlay.style.display = 'none';
+        }, 300);
+    }, duration);
+}
+
 document.getElementById('registrationForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
@@ -18,7 +44,6 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
     const data = Object.fromEntries(formData.entries());
     
     const btn = e.target.querySelector('button');
-    const toast = document.getElementById('toast');
 
     btn.disabled = true;
     btn.innerText = 'Registering...';
@@ -35,19 +60,15 @@ document.getElementById('registrationForm').addEventListener('submit', async (e)
         const result = await response.json();
 
         if (response.ok) {
-            toast.innerText = 'Registration Successful!';
-            toast.classList.add('show');
+            showPopup('✅ Registration Completed Successfully!\n🏸 Welcome to Saanvika Premier League', true);
             e.target.reset();
             if (teamNameGroup) teamNameGroup.style.display = 'none';
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 3000);
         } else {
-            alert('Error: ' + result.error);
+            showPopup(result.error || '❌ Registration Failed', false);
         }
     } catch (err) {
         console.error(err);
-        alert('Failed to connect to server');
+        showPopup('❌ Failed to connect to server', false);
     } finally {
         btn.disabled = false;
         btn.innerText = 'Complete Registration';

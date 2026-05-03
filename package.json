@@ -1,4 +1,9 @@
 {
+  "name": "badminton-tournament",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm start --prefix backend"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",

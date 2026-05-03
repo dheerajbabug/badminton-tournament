@@ -120,6 +120,17 @@ app.get("/api/auth/me", auth, async (req, res) => {
 app.post("/api/register", async (req, res) => {
   try {
     const { name, email, phone, category, teamName, regNo } = req.body;
+
+    // Check for duplicate registration in the same category
+    const existing = await Participant.findOne({ 
+      category, 
+      $or: [{ regNo }, { phone }] 
+    });
+
+    if (existing) {
+      return res.status(400).json({ error: "❌ Duplicate Registration!\nYou are already registered for this category." });
+    }
+
     const participant = new Participant({ name, email, phone, category, teamName, regNo });
     await participant.save();
 
