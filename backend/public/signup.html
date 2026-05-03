@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Saanvika Premier League</title>
+    <title>Sign Up - Saanvika Premier League</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .login-container {
@@ -28,7 +28,7 @@
             font-size: 2rem;
             margin-bottom: 2rem;
             text-align: center;
-            background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+            background: linear-gradient(to right, #4facfe, #00f2fe);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -38,7 +38,7 @@
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
-            color: var(--text-dim);
+            color: var(--text-dim, #94a3b8);
             font-size: 0.9rem;
         }
         .form-group input {
@@ -50,16 +50,17 @@
             color: white;
             font-size: 1rem;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
         .form-group input:focus {
             outline: none;
-            border-color: var(--accent-color);
+            border-color: var(--accent-color, #3b82f6);
             background: rgba(255, 255, 255, 0.1);
         }
         .login-btn {
             width: 100%;
             padding: 1rem;
-            background: var(--accent-color);
+            background: var(--accent-color, #3b82f6);
             border: none;
             border-radius: 8px;
             color: white;
@@ -67,6 +68,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 1rem;
+            font-size: 1rem;
         }
         .login-btn:hover {
             transform: translateY(-2px);
@@ -102,21 +104,24 @@
 <body>
     <div class="login-container">
         <div class="login-card">
-            <h1>Sign In</h1>
-            <form id="loginForm">
+            <h1>Sign Up</h1>
+            <form id="signupForm">
                 <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" id="username" required placeholder="Enter username">
+                    <input type="text" id="username" required placeholder="Choose a username">
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" id="password" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="login-btn">Sign In</button>
+                <button type="submit" class="login-btn">Create Account</button>
                 <p id="errorMsg" class="error-msg"></p>
+                <div class="signup-link">
+                    Already have an account? <a href="login.html">Sign In</a>
+                </div>
             </form>
         </div>
     </div>
-    <script src="login.js"></script>
+    <script src="signup.js"></script>
 </body>
 </html>

@@ -82,14 +82,24 @@ const auth = (req, res, next) => {
 
 app.post("/api/auth/register", async (req, res) => {
   try {
-    const { username, password } = req.body;
-    // Check if admin password matches secret
-    if (req.body.adminSecret !== process.env.ADMIN_SECRET) {
-      return res.status(403).json({ error: "Unauthorized" });
+    const { username, password, adminSecret } = req.body;
+    let role = 'user';
+    
+    if (adminSecret) {
+      if (adminSecret !== process.env.ADMIN_SECRET) {
+        return res.status(403).json({ error: "Invalid admin secret" });
+      }
+      role = 'admin';
     }
-    const user = new User({ username, password });
+    
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: "Username already exists" });
+    }
+
+    const user = new User({ username, password, role });
     await user.save();
-    res.json({ message: "Admin registered" });
+    res.json({ message: `${role === 'admin' ? 'Admin' : 'User'} registered successfully` });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -104,8 +114,8 @@ app.post("/api/auth/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ id: user._id, username: user.username }, JWT_SECRET, { expiresIn: "1d" });
-    res.json({ token, user: { username: user.username } });
+    const token = jwt.sign({ id: user._id, username: user.username, role: user.role }, JWT_SECRET, { expiresIn: "1d" });
+    res.json({ token, user: { username: user.username, role: user.role } });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -117,7 +127,7 @@ app.get("/api/auth/me", auth, async (req, res) => {
 
 // --- PARTICIPANT ROUTES ---
 // Simple Registration
-app.post("/api/register", async (req, res) => {
+app.post("/api/register", auth, async (req, res) => {
   try {
     const { name, email, phone, category, teamName, regNo } = req.body;
 

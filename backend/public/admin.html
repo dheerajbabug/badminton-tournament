@@ -112,11 +112,11 @@
     <div id="toast" class="toast">Tournament Generated Successfully!</div>
 
     <script>
-        if (!localStorage.getItem('adminToken')) {
+        if (!localStorage.getItem('token')) {
             window.location.href = 'login.html';
         }
         document.getElementById('logoutBtn').addEventListener('click', () => {
-            localStorage.removeItem('adminToken');
+            localStorage.removeItem('token');
             window.location.href = 'login.html';
         });
     </script>

@@ -1,10 +1,15 @@
+const adminToken = localStorage.getItem('token');
+if (!adminToken) {
+    window.location.href = 'login.html';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const generateBtn = document.getElementById('generateBtn');
     const participantList = document.getElementById('participantList');
     const activeMatches = document.getElementById('activeMatches');
     const categoryFilter = document.getElementById('categoryFilter');
     const toast = document.getElementById('toast');
-    const token = localStorage.getItem('adminToken');
+    const token = localStorage.getItem('token'); // Unified token key
 
     const headers = {
         'Content-Type': 'application/json',
